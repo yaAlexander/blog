@@ -1,0 +1,28 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <title>Блог сайта</title>
+</head>
+<body>
+
+<header th:insert="blogs/header :: header"></header>
+
+<div class="container mt-5">
+  <div th:each="el : ${post}" class="alert alert-info mt-2">
+    <h1 th:text="${el.title}"/>
+    <p th:text="${el.full_text}"/>
+    <p><b>Просмотры:</b> <span th:text="${el.views}"/></p>
+    <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-warning">Редактировать</a>
+    <form th:action="'/blog/' + ${el.id} + '/remove'" method="post"><br>
+      <button class="btn btn-warning" type="submit">Удалить</button>
+    </form>
+
+  </div>
+</div>
+<div th:insert="blogs/footer :: footer"></div>
+</body>
+</html>
